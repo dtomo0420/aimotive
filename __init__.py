@@ -41,14 +41,46 @@ def index():
             connection.close()
 
 
+@app.route("/insert_item", methods=['POST', 'GET'])
+def insert_item():
+    if request.method == 'POST':
+        try:
+            connection = sqlite3.connect('beer.db')
+
+            id = request.form.get("id")
+            name = request.form.get("name")
+            style = request.form.get("style")
+            abv = request.form.get("abv")
+            ibu = request.form.get("ibu")
+            brewery_id = request.form.get("brewery_id")
+            ounces = request.form.get("ounces")
+            connection.execute("INSERT INTO BEERS "
+                               "(ABV, IBU, ID, NAME, STYLE, BREWERY_ID, OUNCES) VALUES"
+                               "({}, {}, {}, {}, {}, {}, {});"
+                               .format(abv, ibu, id, name, style, brewery_id, ounces))
+            connection.commit()
+            connection.close()
+            msg = "The beer has been successfully recorded."
+        except sqlite3.Error as error:
+            print("Failed to insert to table", error)
+            msg = "An error occurred while recording."
+        finally:
+            if connection:
+                connection.close()
+            return render_template('insert.html', msg=msg)
+
+
 @app.route("/search")
 def search():
     return render_template("search.html")
+
+
 
 @app.route("/insert")
 def insert():
     return render_template("insert.html")
 
+
 if __name__ == '__main__':
-    app.run(port=4164)
+    app.run(port=4179)
 
