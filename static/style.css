@@ -11,6 +11,14 @@ section {
   padding: 0px 20px;
 }
 
+footer {
+  position: absolute;
+  bottom: 10px;
+  width: 100%;
+  color: #000;
+  text-align: center;
+}
+
 /*sidenav*/
 .sidenav {
   height: 100%;

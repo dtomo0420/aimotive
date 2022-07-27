@@ -23,8 +23,9 @@ def select(number):
             data = connection.execute(
                 "SELECT * FROM BEERS WHERE NAME LIKE {} AND STYLE LIKE {} ORDER BY ID;"
                 .format(name, style)).fetchall()
+            length = 0
         else:
-            off = (number-1)*100
+            off = (number)*100
             data = connection.execute("SELECT * FROM BEERS ORDER BY ID LIMIT 100 OFFSET {};".format(off)).fetchall()
 
         connection.commit()
@@ -138,20 +139,5 @@ def modify_page(id, name, style, abv, ibu, brewery_id, ounces):
 
 
 if __name__ == '__main__':
-    app.run(port=4245)
-
-
-    # if request.method == 'POST':
-    #     try:
-    #         connection = sqlite3.connect('beer.db')
-    #
-    #         connection.execute("DELETE FROM BEERS WHERE ID = {} AND NAME = {} AND STYLE = {} AND IBU = {} AND BREWERY_ID = {} AND OUNCES = {} AND ABV = {};".format(id, name, style, ibu, brewery_id, ounces, abv))
-    #         connection.commit()
-    #         connection.close()
-    #     except sqlite3.Error as error:
-    #         print("Failed to delete from the table", error)
-    #     finally:
-    #         if connection:
-    #             connection.close()
-    #         return render_template('insert.html')
+    app.run(port=4253)
 

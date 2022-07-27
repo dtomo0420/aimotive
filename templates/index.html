@@ -1,4 +1,12 @@
 {% extends "layout.html" %}
 {% block content %}
-    <h1>kene ide egy jatek</h1>
+
+<section>
+    <h1>Welcome on our website</h1>
+    <canvas id="ex" height="600" width="600" style="border: 1px solid"></canvas>
+    <script src="{{url_for('static', filename='canvas.js')}}"></script>
+</section>
+<footer>
+    <small>&copy; Copyright 2022, Tamas Deak</small>
+</footer>
 {% endblock content %}

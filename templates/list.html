@@ -1,13 +1,13 @@
 {% extends "layout.html" %}
 {% block content %}
     <section>
-        {% for i in range(len + 1) %}
+        {% for i in range(len) %}
         <a href="{{ url_for('select', number=i) }}">{{i}}</a>
         {% endfor %}
     </section>
    <section>
        <div class="main">
-          {% if len != 0: %}
+          {% if len-1 != 0: %}
              <table class="table">
                 <thead>
                    <td>ID</td>
@@ -17,7 +17,7 @@
                    <td>BREWERYID</td>
                    <td>OUNCES</td>
                    <td>ABV</td>
-                   <td>DELETE</td>
+                   <td>Edit</td>
                 </thead>
                 {% for i in data %}
                  {% set e_id = i["ID"] %}
@@ -36,7 +36,7 @@
                           <td name="brewery_id" id="brewery_id">{{i["BREWERY_ID"]}}</td>
                           <td name="ounces" id="ounces">{{i["OUNCES"]}}</td>
                           <td name="abv" id="abv">{{i["ABV"]}}</td>
-                          <td><input type="submit" name="modify" alt="modify" value="Modify"/></td>
+                          <td><input type="submit" name="modify" alt="modify" value="Edit"/></td>
                        </form>
                    </tr>
                 {% endfor %}
