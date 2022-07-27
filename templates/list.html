@@ -1,5 +1,10 @@
 {% extends "layout.html" %}
 {% block content %}
+    <section>
+        {% for i in range(len + 1) %}
+        <a href="{{ url_for('select', number=i) }}">{{i}}</a>
+        {% endfor %}
+    </section>
    <section>
        <div class="main">
           {% if len != 0: %}
@@ -36,8 +41,6 @@
                    </tr>
                 {% endfor %}
              </table>
-          <a href = "/">Go to the top</a>
-
           {%else:%}
              <h3>No data matching your search.<br>Drink a beer and look for something else.</h3>
             {% endif %}

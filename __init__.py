@@ -7,9 +7,15 @@ app = Flask(__name__)
 def index():
     return render_template("index.html")
 
-@app.route("/select", methods=['GET', 'POST'])
-def select():
+def database_length():
     connection = sqlite3.connect('beer.db')
+    data = connection.execute("SELECT * FROM BEERS;").fetchall()
+    return (len(data) // 100) +1
+
+@app.route("/select/<int:number>", methods=['GET', 'POST'])
+def select(number):
+    connection = sqlite3.connect('beer.db')
+    length = database_length()
     try:
         if request.method == "POST":
             name = "'%" + request.form.get("name") + "%'"
@@ -18,7 +24,8 @@ def select():
                 "SELECT * FROM BEERS WHERE NAME LIKE {} AND STYLE LIKE {} ORDER BY ID;"
                 .format(name, style)).fetchall()
         else:
-            data = connection.execute("SELECT * FROM BEERS ORDER BY ID;").fetchall()
+            off = (number-1)*100
+            data = connection.execute("SELECT * FROM BEERS ORDER BY ID LIMIT 100 OFFSET {};".format(off)).fetchall()
 
         connection.commit()
         connection.close()
@@ -37,7 +44,7 @@ def select():
 
             json_data.append(json_element)
 
-        return render_template('list.html', data=json_data, len=len(json_data))
+        return render_template('list.html', data=json_data, len=length)
     except sqlite3.Error as error:
         print("Failed to select from table", error)
     finally:
