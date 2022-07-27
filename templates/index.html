@@ -1,47 +1,4 @@
 {% extends "layout.html" %}
 {% block content %}
-   <section>
-       <div class="main">
-          {% if len != 0: %}
-             <table class="table">
-                <thead>
-                   <td>ID</td>
-                   <td>NAME</td>
-                   <td>STYLE</td>
-                   <td>IBU</td>
-                   <td>BREWERYID</td>
-                   <td>OUNCES</td>
-                   <td>ABV</td>
-                   <td>DELETE</td>
-                </thead>
-                {% for i in data %}
-                 {% set e_id = i["ID"] %}
-                 {% set e_name = i["NAME"] %}
-                 {% set e_style = i["STYLE"] %}
-                 {% set e_ibu = i["IBU"] %}
-                 {% set e_brewery_id = i["BREWERY_ID"] %}
-                 {% set e_ounces = i["OUNCES"] %}
-                 {% set e_abv = i["ABV"] %}
-                   <tr>
-                       <form action="{{ url_for('modify_page', id=e_id, name=e_name, style=e_style, ibu=e_ibu, brewery_id=e_brewery_id, ounces=e_ounces, abv=e_abv)}}" method="post">
-                           <td name="id" id="id">{{i["ID"]}}</td>
-                          <td name="name" id="name">{{i["NAME"]}}</td>
-                          <td name="style" id="style">{{i["STYLE"]}}</td>
-                          <td name="ibu" id="ibu">{{i["IBU"]}}</td>
-                          <td name="brewery_id" id="brewery_id">{{i["BREWERY_ID"]}}</td>
-                          <td name="ounces" id="ounces">{{i["OUNCES"]}}</td>
-                          <td name="abv" id="abv">{{i["ABV"]}}</td>
-                          <td><input type="submit" name="modify" alt="modify" value="Modify"/></td>
-                       </form>
-                   </tr>
-                {% endfor %}
-             </table>
-          <a href = "/">Go to the top</a>
-
-          {%else:%}
-             <h3>No data matching your search.<br>Drink a beer and look for something else.</h3>
-            {% endif %}
-        </div>
-    </section>
-
+    <h1>kene ide egy jatek</h1>
 {% endblock content %}

@@ -3,8 +3,12 @@ import sqlite3
 
 app = Flask(__name__)
 
-@app.route("/", methods=['GET', 'POST'])
+@app.route("/")
 def index():
+    return render_template("index.html")
+
+@app.route("/select", methods=['GET', 'POST'])
+def select():
     connection = sqlite3.connect('beer.db')
     try:
         if request.method == "POST":
@@ -33,7 +37,7 @@ def index():
 
             json_data.append(json_element)
 
-        return render_template('index.html', data=json_data, len=len(json_data))
+        return render_template('list.html', data=json_data, len=len(json_data))
     except sqlite3.Error as error:
         print("Failed to select from table", error)
     finally:
@@ -67,7 +71,7 @@ def insert_item():
         finally:
             if connection:
                 connection.close()
-            return render_template('insert.html', msg=msg)
+            return render_template("index.html")
 
 
 @app.route("/search")
@@ -94,7 +98,8 @@ def remove_item(id):
         finally:
             if connection:
                 connection.close()
-            return render_template('insert.html')
+            return render_template("index.html")
+
 
 @app.route("/modify_item/<string:id>/<string:name>/<string:style>/<string:abv>/<string:ibu>/<string:brewery_id>/<string:ounces>", methods=['POST', 'GET'])
 def modify_item(id, name, style, abv, ibu, brewery_id, ounces):
@@ -116,14 +121,13 @@ def modify_item(id, name, style, abv, ibu, brewery_id, ounces):
         finally:
             if connection:
                 connection.close()
-            return render_template('insert.html')
+            return render_template("index.html")
 
 
 @app.route("/modify_page/<string:id>/<string:name>/<string:style>/<string:abv>/<string:ibu>/<string:brewery_id>/<string:ounces>", methods=['POST', 'GET'])
 def modify_page(id, name, style, abv, ibu, brewery_id, ounces):
     print(id, name, style, abv, ibu, brewery_id, ounces)
     return render_template("edit.html", id=id, name=name, style=style, abv=abv, ibu=ibu, brewery_id=brewery_id, ounces=ounces)
-
 
 
 if __name__ == '__main__':
