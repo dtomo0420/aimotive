@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+{% block content %}
+   <section class="sectionform" id="insertfrom">
+       <div class="title">
+           <h2>Edit the beer</h2>
+           <p value="msg"></p>
+       </div>
+         {% set e_id = id %}
+         {% set e_name = name %}
+         {% set e_style = style %}
+         {% set e_ibu = ibu %}
+         {% set e_brewery_id = brewery_id %}
+         {% set e_ounces = ounces %}
+         {% set e_abv = abv %}
+
+       <form action="{{ url_for('modify_item', id=e_id, name=e_name, style=e_style, ibu=e_ibu, brewery_id=e_brewery_id, ounces=e_ounces, abv=e_abv) }}" method="post" class="form">
+
+           <ul>
+             <li>
+                 <label for="style">Style</label><br>
+                 <input type="text" name="style" id="style" value={{e_style}} required/>
+             </li>
+
+             <li>
+                 <label for="abv">ABV</label><br>
+                 <input type="text" name="abv" id="abv" value={{e_abv}} required/>
+             </li>
+
+             <li>
+                 <label for="ibu">IBU</label><br>
+                 <input type="text" name="ibu" id="ibu" value={{e_ibu}} required/>
+             </li>
+
+             <li>
+                 <label for="brewery_id">BREWERY ID</label><br>
+                 <input type="text" name="brewery_id" id="brewery_id" value={{e_brewery_id}} required/>
+             </li>
+
+             <li>
+                 <label for="ounces">OUNCES</label><br>
+                 <input type="text" name="ounces" id="ounces" value={{e_ounces}} required/>
+             </li>
+            <li>
+                <input type="submit" name="modify" id="modify" alt="modify" value="Modify" />
+            </li>
+           </ul>
+     </form>
+   </section>
+{% endblock content %}
