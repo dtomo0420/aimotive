@@ -7,7 +7,14 @@ app = Flask(__name__)
 def index():
     connection = sqlite3.connect('beer.db')
     try:
-        data = connection.execute("SELECT * FROM BEERS ORDER BY ID;").fetchall()
+        if request.method == "POST":
+            name = "'%" + request.form.get("name") + "%'"
+            style = "'%" + request.form.get("style") + "%'"
+            data = connection.execute(
+                "SELECT * FROM BEERS WHERE NAME LIKE {} AND STYLE LIKE {} ORDER BY ID;"
+                .format(name, style)).fetchall()
+        else:
+            data = connection.execute("SELECT * FROM BEERS ORDER BY ID;").fetchall()
 
         connection.commit()
         connection.close()
@@ -33,5 +40,15 @@ def index():
         if connection:
             connection.close()
 
+
+@app.route("/search")
+def search():
+    return render_template("search.html")
+
+@app.route("/insert")
+def insert():
+    return render_template("insert.html")
+
 if __name__ == '__main__':
-    app.run(port=4023)
+    app.run(port=4164)
+

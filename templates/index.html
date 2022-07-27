@@ -1,12 +1,5 @@
-<!doctype html>
-<html>
-<head>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
-   <div class="sidenav">
-     <a href="{{ url_for('index') }}">Home</a>
-   </div>
+{% extends "layout.html" %}
+{% block content %}
    <section>
        <div class="main">
           {% if len != 0: %}
@@ -40,5 +33,4 @@
         </div>
     </section>
 
-</body>
-</html>
+{% endblock content %}

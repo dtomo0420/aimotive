@@ -5,7 +5,9 @@
 </head>
 <body>
    <div class="sidenav">
-     <a href="{{ url_for('index') }}" class="sidenavelement">Home</a>
+       <a href="{{ url_for('index') }}">Home</a>
+       <a href="{{ url_for('search') }}">Search</a>
+
    </div>
 
    {% block content %}{% endblock %}

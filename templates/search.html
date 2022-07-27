@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+{% block content %}
+   <section class="sectionform">
+       <div class="title">
+           <h2>Search a beer</h2>
+       </div>
+        <form action="{{ url_for('index') }}" method="post" class="form">
+           <ul>
+             <li>
+                 <label for="name"></label>
+                 <input type="text" name="name" id="name" placeholder="Name"/>
+             </li>
+
+             <li>
+                 <label for="style"></label>
+                 <input type="text" name="style" id="style" placeholder="Style"/>
+             </li>
+             <li>
+                 <input type="submit" name="join" id="search" alt="search" placeholder="Search beer"/>
+             </li>
+           </ul>
+     </form>
+   </section>
+{% endblock content %}

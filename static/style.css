@@ -6,6 +6,12 @@ body {
   background-repeat: no-repeat;
 }
 
+section {
+  margin-left: 160px;
+  font-size: 40px;
+  padding: 0px 20px;
+}
+
 /*sidenav*/
 .sidenav {
   height: 100%;
@@ -31,12 +37,7 @@ a:hover {
   color: #f1f1f1;
 }
 
-/*section*/
-.main {
-  margin-left: 160px; /* Same as the width of the sidenav */
-  font-size: 28px; /* Increased text to enable scrolling */
-  padding: 0px 10px;
-}
+
 
 /*table*/
 table {
@@ -64,4 +65,78 @@ table tbody tr {
 
 table tbody tr:nth-of-type(even) {
   background-color: #f3f3f3;
+}
+
+/*form*/
+.sectionform {
+  background: url(img/beer_background.jpg);
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 800px;
+  height: 450px;
+  text-align: center;
+  display: flex;
+  color: white;
+  box-shadow: 3px 10px 20px 5px rgba(0, 0, 0, .5);
+}
+
+.title {
+  width: 45%;
+  background: rgba(20, 20, 20, .5);
+  /*padding: 10px 0;*/
+  border-right: 5px solid rgba(30, 30, 30, .8);
+}
+
+.title h2 {
+  padding-top: 10px;
+  font-weight: 300;
+}
+
+.title p {
+  font-size: 18px;
+}
+
+.form {
+  width: 70%;
+  padding: 30px 0;
+  background: rgba(20, 40, 40, .8);
+  transition: .2s;
+}
+
+.form h2 {
+  font-weight: 300;
+}
+
+input {
+  margin: 15px 0;
+  padding: 10px;
+  width: 250px;
+  border: 1px solid rgba(10, 180, 180, 1);
+  outline: none;
+  font-size: 18px;
+  color: white;
+  background: rgba(20, 40, 40, .8);
+}
+
+/*input[type="text"] {*/
+/*  background-color : #fff;*/
+/*}*/
+
+li {
+  list-style: none;
+  padding: 0;
+}
+
+.btn {
+  border: 1px solid rgba(10, 180, 180, 1);
+  background: rgba(20, 20, 20, .6);
+  font-size: 18px;
+  color: white;
+  margin-top: 20px;
+  padding: 10px 50px;
+  cursor: pointer;
+  transition: .4s
 }
