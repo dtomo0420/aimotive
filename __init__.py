@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, url_for, redirect
 import sqlite3
 
+
 app = Flask(__name__)
 
 
@@ -15,6 +16,14 @@ def database_length():
     return (len(data) // 100) + 1
 
 
+'''
+in the case of the POST method: list the elements with the appropriate name and style
+in the case of the GET method: list all elements
+
+@param  number  it points out that it should be listed from which row
+
+@return after   recording it will return to index.html
+'''
 @app.route("/select/<int:number>", methods=['GET', 'POST'])
 def select(number):
     connection = sqlite3.connect('beer.db')
@@ -28,7 +37,7 @@ def select(number):
                 .format(name, style)).fetchall()
             length = 1
         else:
-            off = (number)*100
+            off = (number) * 100
             data = connection.execute("SELECT * FROM BEERS ORDER BY ID LIMIT 100 OFFSET {};".format(off)).fetchall()
 
         connection.commit()
@@ -56,6 +65,11 @@ def select(number):
             connection.close()
 
 
+'''
+insert  new elements to the database
+
+@return after recording it will return to index.html
+'''
 @app.route("/insert_item", methods=['POST', 'GET'])
 def insert_item():
     if request.method == 'POST':
@@ -94,6 +108,14 @@ def insert():
     return render_template("insert.html")
 
 
+'''
+updates the elements of the database where the id and name are the same as those given in the parameter.
+
+@param  id      id of the beer to be modified
+@param name    name of the beer to be modified
+
+@return returns to the search page
+'''
 @app.route("/modify_item/<string:id>/<string:name>", methods=['POST', 'GET'])
 def modify_item(id, name):
     if request.method == 'POST':
@@ -106,8 +128,9 @@ def modify_item(id, name):
             n_brewery_id = request.form.get("brewery_id")
             n_ounces = request.form.get("ounces")
 
-            connection.execute("UPDATE BEERS SET STYLE = {}, IBU = {}, BREWERY_ID = {}, OUNCES = {}, ABV = {} WHERE ID = {} AND NAME = {};"
-                               .format(n_style, n_ibu, n_brewery_id, n_ounces, n_abv, id, name))
+            connection.execute(
+                "UPDATE BEERS SET STYLE = {}, IBU = {}, BREWERY_ID = {}, OUNCES = {}, ABV = {} WHERE ID = {} AND NAME = {};"
+                .format(n_style, n_ibu, n_brewery_id, n_ounces, n_abv, id, name))
             connection.commit()
             connection.close()
         except sqlite3.Error as error:
@@ -118,12 +141,24 @@ def modify_item(id, name):
             return render_template("search.html")
 
 
-@app.route("/modify_page/<string:id>/<string:name>/<string:style>/<string:abv>/<string:ibu>/<string:brewery_id>/<string:ounces>", methods=['POST', 'GET'])
+'''
+passes parameters
+
+@param  id     the id of the beer to be modified
+@param name    the name of the beer to be modified
+@param style   the current style of the beer to be modified
+@param abv     the current abv value of the beer to be modified
+@param ibu     the current ibu value of the beer to be modified
+@param brewery_id   the current brewery_id value of the beer to be modified
+@param ounces   the current ounces value of the beer to be modified
+
+@return returns to edit page
+'''
+@app.route(
+    "/modify_page/<string:id>/<string:name>/<string:style>/<string:abv>/<string:ibu>/<string:brewery_id>/<string:ounces>", methods=['POST', 'GET'])
 def modify_page(id, name, style, abv, ibu, brewery_id, ounces):
-    print(id, name, style, abv, ibu, brewery_id, ounces)
     return render_template("edit.html", id=id, name=name, style=style, abv=abv, ibu=ibu, brewery_id=brewery_id, ounces=ounces)
 
 
 if __name__ == '__main__':
-    app.run()
-
+    app.run(port=4040)
