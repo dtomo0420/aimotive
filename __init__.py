@@ -154,11 +154,10 @@ passes parameters
 
 @return returns to edit page
 '''
-@app.route(
-    "/modify_page/<string:id>/<string:name>/<string:style>/<string:abv>/<string:ibu>/<string:brewery_id>/<string:ounces>", methods=['POST', 'GET'])
+@app.route("/modify_page/<string:id>/<string:name>/<string:style>/<string:abv>/<string:ibu>/<string:brewery_id>/<string:ounces>", methods=['POST', 'GET'])
 def modify_page(id, name, style, abv, ibu, brewery_id, ounces):
     return render_template("edit.html", id=id, name=name, style=style, abv=abv, ibu=ibu, brewery_id=brewery_id, ounces=ounces)
 
 
 if __name__ == '__main__':
-    app.run(port=4040)
+    app.run(port=4041)

@@ -7,44 +7,37 @@
        </div>
         <form action="{{ url_for('insert_item') }}" method="post" class="form">
             <ul>
-               <li>
-                    <label for="id"></label>
-                   <input type="text" name="id" id="id" placeholder="ID" required />
-               </li>
-
-             <li>
-                 <label for="name"></label>
-                 <input type="text" name="name" id="name" placeholder="Name"  required />
-             </li>
-
-             <li>
-                 <label for="style"></label>
-                 <input type="text" name="style" id="style" placeholder="Style" required/>
-             </li>
-
-             <li>
-                 <label for="abv"></label>
-                 <input type="text" name="abv" id="abv" placeholder="Alcohol content" required/>
-             </li>
-
-             <li>
-                 <label for="ibu"></label>
-                 <input type="text" name="ibu" id="ibu" placeholder="IBU" autocomplete="off" required/>
-             </li>
-
-             <li>
-                 <label for="brewery_id"></label>
-                 <input type="text" name="brewery_id" id="brewery_id" placeholder="Brewery ID" required/>
-             </li>
-
-             <li>
-                 <label for="ounces"></label>
-                 <input type="text" name="ounces" id="ounces" placeholder="Ounces" required/>
-             </li>
-
-             <li>
-                 <input type="submit" name="insert" id="insert" alt="insert" value="Add"/>
-             </li>
+                 <li>
+                      <label for="id"></label>
+                     <input type="text" name="id" id="id" placeholder="ID" required />
+                 </li>
+                 <li>
+                     <label for="name"></label>
+                     <input type="text" name="name" id="name" placeholder="Name"  required />
+                 </li>
+                 <li>
+                     <label for="style"></label>
+                     <input type="text" name="style" id="style" placeholder="Style" required/>
+                 </li>
+                 <li>
+                     <label for="abv"></label>
+                     <input type="text" name="abv" id="abv" placeholder="Alcohol content" required/>
+                 </li>
+                 <li>
+                     <label for="ibu"></label>
+                     <input type="text" name="ibu" id="ibu" placeholder="IBU" autocomplete="off" required/>
+                 </li>
+                 <li>
+                     <label for="brewery_id"></label>
+                     <input type="text" name="brewery_id" id="brewery_id" placeholder="Brewery ID" required/>
+                 </li>
+                 <li>
+                     <label for="ounces"></label>
+                     <input type="text" name="ounces" id="ounces" placeholder="Ounces" required/>
+                 </li>
+                 <li>
+                     <input type="submit" name="insert" id="insert" alt="insert" value="Add"/>
+                 </li>
            </ul>
      </form>
    </section>
