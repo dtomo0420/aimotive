@@ -6,13 +6,11 @@
 <body>
    <div class="sidenav">
        <a href="{{ url_for('index') }}">Home</a>
-       <a href="{{ url_for('select', number=1) }}">Discover</a>
+       <a href="{{ url_for('select', number=0) }}">Discover</a>
        <a href="{{ url_for('search') }}">Search</a>
        <a href="{{ url_for('insert') }}">Insert</a>
 
    </div>
-
    {% block content %}{% endblock %}
-
 </body>
 </html>

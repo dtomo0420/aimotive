@@ -2,7 +2,6 @@ body {
   font-family: "Open Sans", sans-serif;
   margin: 0;
   padding: 0;
-  /*overflow: hidden;*/
 }
 
 section {
@@ -17,6 +16,38 @@ footer {
   width: 100%;
   color: #000;
   text-align: center;
+}
+
+/*jquery*/
+#gameArea {
+  position: relative;
+  margin: auto;
+  width: 1600px;
+  height: 800px;
+  background-image: url("img/pub_background.jpg");
+  background-size: 100% 100%;
+  border: 1px black solid;
+}
+
+#tyrion {
+  top:240px;
+  left:1200px;
+  width: 200px;
+  z-index: 1;
+  position: absolute;
+}
+
+#tywin {
+  left:1200px;
+  width: 200px;
+  z-index: 1;
+  position: absolute;
+}
+
+#lose {
+  color: white;
+  position: absolute;
+  font-size: 50px;
 }
 
 /*sidenav*/
@@ -147,5 +178,5 @@ li {
   margin-top: 20px;
   padding: 10px 50px;
   cursor: pointer;
-  transition: .4s
+  transition: .4s;
 }

@@ -7,7 +7,7 @@
     </section>
    <section>
        <div class="main">
-          {% if len-1 != 0: %}
+          {% if len != 0: %}
              <table class="table">
                 <thead>
                    <td>ID</td>
@@ -42,8 +42,8 @@
                 {% endfor %}
              </table>
           {%else:%}
-             <h3>No data matching your search.<br>Drink a beer and look for something else.</h3>
-            {% endif %}
+           <h3>No data matching your search.<br>Drink a beer and look for something else.</h3>
+          {% endif %}
         </div>
     </section>
 

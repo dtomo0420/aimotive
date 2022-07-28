@@ -3,14 +3,17 @@ import sqlite3
 
 app = Flask(__name__)
 
+
 @app.route("/")
 def index():
     return render_template("index.html")
 
+
 def database_length():
     connection = sqlite3.connect('beer.db')
     data = connection.execute("SELECT * FROM BEERS;").fetchall()
-    return (len(data) // 100) +1
+    return (len(data) // 100) + 1
+
 
 @app.route("/select/<int:number>", methods=['GET', 'POST'])
 def select(number):
@@ -23,7 +26,7 @@ def select(number):
             data = connection.execute(
                 "SELECT * FROM BEERS WHERE NAME LIKE {} AND STYLE LIKE {} ORDER BY ID;"
                 .format(name, style)).fetchall()
-            length = 0
+            length = 1
         else:
             off = (number)*100
             data = connection.execute("SELECT * FROM BEERS ORDER BY ID LIMIT 100 OFFSET {};".format(off)).fetchall()
@@ -66,16 +69,15 @@ def insert_item():
             ibu = request.form.get("ibu")
             brewery_id = request.form.get("brewery_id")
             ounces = request.form.get("ounces")
+
             connection.execute("INSERT INTO BEERS "
                                "(ABV, IBU, ID, NAME, STYLE, BREWERY_ID, OUNCES) VALUES"
                                "({}, {}, {}, {}, {}, {}, {});"
                                .format(abv, ibu, id, name, style, brewery_id, ounces))
             connection.commit()
             connection.close()
-            msg = "The beer has been successfully recorded."
         except sqlite3.Error as error:
             print("Failed to insert to table", error)
-            msg = "An error occurred while recording."
         finally:
             if connection:
                 connection.close()
@@ -92,25 +94,8 @@ def insert():
     return render_template("insert.html")
 
 
-@app.route("/remove_item/<string:id>", methods=['POST', 'GET'])
-def remove_item(id):
-    if request.method == 'POST':
-        try:
-            connection = sqlite3.connect('beer.db')
-
-            connection.execute("DELETE FROM BEERS WHERE ID = {};".format(id))
-            connection.commit()
-            connection.close()
-        except sqlite3.Error as error:
-            print("Failed to delete from the table", error)
-        finally:
-            if connection:
-                connection.close()
-            return render_template("index.html")
-
-
-@app.route("/modify_item/<string:id>/<string:name>/<string:style>/<string:abv>/<string:ibu>/<string:brewery_id>/<string:ounces>", methods=['POST', 'GET'])
-def modify_item(id, name, style, abv, ibu, brewery_id, ounces):
+@app.route("/modify_item/<string:id>/<string:name>", methods=['POST', 'GET'])
+def modify_item(id, name):
     if request.method == 'POST':
         try:
             connection = sqlite3.connect('beer.db')
@@ -121,7 +106,8 @@ def modify_item(id, name, style, abv, ibu, brewery_id, ounces):
             n_brewery_id = request.form.get("brewery_id")
             n_ounces = request.form.get("ounces")
 
-            connection.execute("UPDATE BEERS SET STYLE = {}, IBU = {}, BREWERY_ID = {}, OUNCES = {}, ABV = {} WHERE ID = {} AND NAME = {};".format(n_style, n_ibu, n_brewery_id, n_ounces, n_abv, id, name))
+            connection.execute("UPDATE BEERS SET STYLE = {}, IBU = {}, BREWERY_ID = {}, OUNCES = {}, ABV = {} WHERE ID = {} AND NAME = {};"
+                               .format(n_style, n_ibu, n_brewery_id, n_ounces, n_abv, id, name))
             connection.commit()
             connection.close()
         except sqlite3.Error as error:
@@ -129,7 +115,7 @@ def modify_item(id, name, style, abv, ibu, brewery_id, ounces):
         finally:
             if connection:
                 connection.close()
-            return render_template("index.html")
+            return render_template("search.html")
 
 
 @app.route("/modify_page/<string:id>/<string:name>/<string:style>/<string:abv>/<string:ibu>/<string:brewery_id>/<string:ounces>", methods=['POST', 'GET'])
@@ -139,5 +125,5 @@ def modify_page(id, name, style, abv, ibu, brewery_id, ounces):
 
 
 if __name__ == '__main__':
-    app.run(port=4253)
+    app.run()
 

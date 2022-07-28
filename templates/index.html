@@ -1,12 +1,10 @@
 {% extends "layout.html" %}
 {% block content %}
-
-<section>
-    <h1>Welcome on our website</h1>
-    <canvas id="ex" height="600" width="600" style="border: 1px solid"></canvas>
-    <script src="{{url_for('static', filename='canvas.js')}}"></script>
-</section>
-<footer>
-    <small>&copy; Copyright 2022, Tamas Deak</small>
-</footer>
+    <section>
+        <h1>Welcome on our website</h1>
+        <script src="{{url_for('static', filename='style.css')}}"></script>
+        <script src="{{url_for('static', filename='jquery-3.2.0.min.js')}}"></script>
+        <div id="gameArea"></div>
+        <script src="{{url_for('static', filename='jquery.js')}}"></script>
+    </section>
 {% endblock content %}
