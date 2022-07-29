@@ -37,7 +37,7 @@ def select(number):
                 .format(name, style)).fetchall()
             length = 1
         else:
-            off = (number) * 100
+            off = number * 100
             data = connection.execute("SELECT * FROM BEERS ORDER BY ID LIMIT 100 OFFSET {};".format(off)).fetchall()
 
         connection.commit()
