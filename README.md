@@ -38,5 +38,3 @@ Your task is to create a backend application through which the data is made avai
     4. (optional) If the underlying dataset would be much (10-100 millions of records) larger, do you think your design was suitable to handle it? If so why; and if not, how would you modify your design to make it suitable for the task?
 
 You should solve task #1 first, and tackle the optional ones only if you have the time. It is completely acceptable, and much better, to hand in a clean, working solution for task #1 than to hand in multiple incomplete or botched ones.
-
-You can use any language or technology you’re comfortable with, but please provide a short description on how to use your solution.
